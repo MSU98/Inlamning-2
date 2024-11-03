@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Väderjämförelse: Stockholm vs Madrid</title>
+    <img alt="Väderikoner" src="img/Väderikoner.jpg">
+</head>
+<body>
+    <h2 class="text-center my-4">Väderförhållanden i Svergies och Spaniens huvudstader</h2>
+    <p> Ha en underbar dag oavsett väder! 🌈</p>
+    <p> Kläder efter väder 🌤️</p>
+
+    <select id="citySelector" class="form-select mb-3">
+        <option value="">Välj huvudstad</option>
+        <option value="stockholm">Stockholm</option>
+        <option value="madrid">Madrid</option>
+    </select>
+
+    <div id="weather-container" class="container weather-card">
+        <div class="row">
+            <div id="todaysWeatherIcon" class="col-2 text-center weather-icon">
+                ☁️
+            </div>
+            <div class="col-2">
+                <span id="todaysTemp">--</span>
+                <div class="temp-unit"><strong>°C</strong></div>
+            </div>
+            <div class="col-2 text-start humidity">
+                <div id="humidity">Luftfuktighet: --%</div>
+            </div>
+            <div class="col-6 text-end location-info">
+                <div><strong id="cityName">Stad</strong></div>
+                <div id="description">Beskrivning</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
