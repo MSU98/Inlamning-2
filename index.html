@@ -5,14 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="img/favicon.ico">
     <title>Väderjämförelse: Stockholm vs Madrid</title>
-    <img alt="Väderikoner" src="img/Väderikoner.jpg">
+    
+    <style>
+        body {
+            background-color: #53595e;
+            font-family: Arial, sans-serif;
+        }
 
+        h2 {
+            color: #bace0c;
+            font-weight: bold;
+        }
 
+        #weather-container {
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            color: #000000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.5s ease;
+        }
+
+        .weather-icon {
+            font-size: 76px;
+        }
+
+        .temp-unit {
+            font-size: 18px;
+            color: #fffefe;
+        }
+
+        .humidity, .location-info {
+            font-size: 16px;
+            color: #fffafa;
+        }
+
+        #citySelector {
+            font-size: 18px;
+            border-radius: 6px;
+            padding: 8px;
+            background-color: #bace0c;
+            color: #333;
+        }
+
+        .weather-card {
+            border: 1px solid #113457;
+        }
+    </style>
 </head>
 <body>
-    <h2 class="text-center my-4">Väderförhållanden i Svergies och Spaniens huvudstader</h2>
-    <p> Ha en underbar dag oavsett väder! 🌈</p>
-    <p> Kläder efter väder 🌤️</p>
+    <img alt="Väderikoner" src="img/Väderikoner.jpg">
+    
+    <h2 class="text-center my-4">Väderförhållanden i Sveriges och Spaniens huvudstäder</h2>
+    <p>Ha en underbar dag oavsett väder! 🌈</p>
+    <p>Kläder efter väder 🌤️</p>
 
     <select id="citySelector" class="form-select mb-3">
         <option value="">Välj huvudstad</option>
@@ -38,113 +84,63 @@
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const weatherData = {
-            stockholm: {
-                city: "Stockholm",
-                country: "Sverige",
-                temperature: "5°C",
-                description: "Molnigt",
-                humidity: "50%",
-                icon: "☁️",
-                background: "linear-gradient(to right, #4e73df, #1cc88a)",
-                iconColor: "#4e73df"
-            },
-            madrid: {
-                city: "Madrid",
-                country: "Spanien",
-                temperature: "25°C",
-                description: "Soligt",
-                humidity: "30%",
-                icon: "☀️",
-                background: "linear-gradient(to right, #f6d365, #fda085)",
-                iconColor: "#f6b73c"
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherData = {
+                stockholm: {
+                    city: "Stockholm",
+                    country: "Sverige",
+                    temperature: "5°C",
+                    description: "Molnigt",
+                    humidity: "15%",
+                    icon: "☁️",
+                    background: "linear-gradient(to right, #4e73df, #1cc88a)",
+                    iconColor: "#4e73df"
+                },
+                madrid: {
+                    city: "Madrid",
+                    country: "Spanien",
+                    temperature: "20°C",
+                    description: "Soligt",
+                    humidity: "40%",
+                    icon: "☀️",
+                    background: "linear-gradient(to right, #f6d365, #fda085)",
+                    iconColor: "#f6b73c"
+                }
+            };
+
+            function updateWeather(city) {
+                const data = weatherData[city];
+                if (data) {
+                    document.getElementById("todaysWeatherIcon").innerHTML = data.icon;
+                    document.getElementById("todaysTemp").textContent = data.temperature;
+                    document.getElementById("humidity").textContent = `Luftfuktighet: ${data.humidity}`;
+                    document.getElementById("cityName").textContent = `${data.city}, ${data.country}`;
+                    document.getElementById("description").textContent = data.description;
+
+                    document.getElementById("weather-container").style.background = data.background;
+                    document.getElementById("todaysWeatherIcon").style.color = data.iconColor;
+                } else {
+                    document.getElementById("todaysWeatherIcon").innerHTML = "";
+                    document.getElementById("todaysTemp").textContent = "--";
+                    document.getElementById("humidity").textContent = "Luftfuktighet: --%";
+                    document.getElementById("cityName").textContent = "Stad";
+                    document.getElementById("description").textContent = "Beskrivning";
+
+                    document.getElementById("weather-container").style.background = "#f8f9fa";
+                    document.getElementById("todaysWeatherIcon").style.color = "#333";
+                }
             }
-        };
 
-        function updateWeather(city) {
-            const data = weatherData[city];
-            if (data) {
-                document.getElementById("todaysWeatherIcon").innerHTML = data.icon;
-                document.getElementById("todaysTemp").textContent = data.temperature;
-                document.getElementById("humidity").textContent = `Luftfuktighet: ${data.humidity}`;
-                document.getElementById("cityName").textContent = `${data.city}, ${data.country}`;
-                document.getElementById("description").textContent = data.description;
-
-                document.getElementById("weather-container").style.background = data.background;
-                document.getElementById("todaysWeatherIcon").style.color = data.iconColor;
-            } else {
-                document.getElementById("todaysWeatherIcon").innerHTML = "";
-                document.getElementById("todaysTemp").textContent = "--";
-                document.getElementById("humidity").textContent = "Luftfuktighet: --%";
-                document.getElementById("cityName").textContent = "Stad";
-                document.getElementById("description").textContent = "Beskrivning";
-
-                document.getElementById("weather-container").style.background = "#f8f9fa";
-                document.getElementById("todaysWeatherIcon").style.color = "#333";
-            }
-        }
-
-        document.getElementById("citySelector").addEventListener("change", (event) => {
-            updateWeather(event.target.value);
+            document.getElementById("citySelector").addEventListener("change", (event) => {
+                updateWeather(event.target.value);
+            });
         });
-    });
-</script>
+    </script>
 
-<style>
-body {
-    background-color: #53595e;
-    font-family: Arial, sans-serif;
-}
-
-h2 {
-    color: #bace0c;
-    font-weight: bold;
-}
-
-#weather-container {
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-    color: #000000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: 0.5s ease;
-}
-
-.weather-icon {
-    font-size: 76px;
-
-}
-
-
-.temp-unit {
-    font-size: 18px;
-    color: #fffefe;
-}
-
-.humidity, .location-info {
-    font-size: 16px;
-    color: #fffafa;
-}
-
-#citySelector {
-    font-size: 18px;
-    border-radius: 6px;
-    padding: 8px;
-    background-color: #bace0c;
-    color: #333;
-}
-
-.weather-card {
-    border: 1px solid #113457;
-}
-
-</style>
-<footer>
-    <h1>MSU Väderapplikation</h1>
- </footer>
+    <footer>
+        <h1>MSU Väderapplikation</h1>
+    </footer>
 </body>
 </html>
